@@ -8,6 +8,19 @@ const results = document.getElementById("results");
 
 const status = document.getElementById("status");
 
+const userInput = document.getElementById("n2");
+
+
+function calc(){
+  let n1 = parseInt(document.getElementById("n1").value);
+  let n2 = parseInt(document.getElementById("n2").value);
+  const operator = document.getElementById("operators").value;
+
+  if (operator === "+"){
+    n1 = document.getElementById("n1").value = n1 + n2;
+  }
+}
+
 function getResults() {
   clearTodos();
   fetch("/all")
@@ -28,7 +41,7 @@ function getResults() {
 function newTodoSnippet(res) {
   for (var i = 0; i < res.length; i++) {
     const data_id = res[i]["_id"];
-    const title = res[i]["title"];
+    const title = res[i]["n2"];
     const todoList = document.getElementById("results");
     snippet = `
       <p class="data-entry">
@@ -47,14 +60,14 @@ function clearTodos() {
 function resetTitleAndNote() {
   const note = document.getElementById("note");
   note.value = "";
-  const title = document.getElementById("title");
+  const title = document.getElementById("n2");
   title.value = "";
 }
 
 function updateTitleAndNote(data) {
   const note = document.getElementById("note");
   note.value = data.note;
-  const title = document.getElementById("title");
+  const title = document.getElementById("n2");
   title.value = data.title;
 }
 
@@ -79,6 +92,12 @@ clear.addEventListener("click", function(e) {
       });
   }
 });
+
+userInput.addEventListener("click",function(e){
+  if(e.target.matches("#n2")){
+    resetTitleAndNote();
+  }
+})
 
 results.addEventListener("click", function(e) {
   if (e.target.matches(".delete")) {
@@ -124,7 +143,7 @@ actionBtn.addEventListener("click", function(e) {
   if (e.target.matches("#updater")) {
     updateBtnEl = e.target;
     data_id = updateBtnEl.getAttribute("data-id");
-    const title = document.getElementById("title").value;
+    const title = document.getElementById("n2").value;
     const note = document.getElementById("note").value;
     fetch("/update/" + data_id, {
       method: "post",
@@ -151,6 +170,7 @@ actionBtn.addEventListener("click", function(e) {
         console.log("Fetch Error :-S", err);
       });
   } else if (e.target.matches("#make-new")) {
+    calc();
     element = e.target;
     data_id = element.getAttribute("data-id");
     fetch("/submit", {
@@ -160,7 +180,7 @@ actionBtn.addEventListener("click", function(e) {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        title: document.getElementById("title").value,
+        title: document.getElementById("n2").value,
         note: document.getElementById("note").value,
         created: Date.now()
       })

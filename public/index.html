@@ -29,7 +29,8 @@
     h4 {
       color: white;
     }
-    p{
+
+    p {
       font-family: 'Proxima Nova Soft', 'Helvetica Neue', sans-serif;
       color: white;
     }
@@ -48,7 +49,7 @@
       margin-right: auto;
       font-size: 42px;
       background-color: none;
-      color:#f2d53c;
+      color: #f2d53c;
     }
 
     textarea {
@@ -58,7 +59,7 @@
       margin-right: auto;
       font-size: 24px;
       background-color: none;
-      color:#f2d53c;
+      color: #f2d53c;
     }
 
     .data-title {
@@ -73,7 +74,7 @@
       margin-left: auto;
       margin-right: auto;
       background-color: none;
-      color:#f2d53c;
+      color: #f2d53c;
       font-family: 'Proxima Nova Soft', 'Helvetica Neue', sans-serif;
     }
 
@@ -99,12 +100,22 @@
       <div class="col">
         <h2>Status: <span id="status" class="primary">Creating</span></h2>
       </div>
+      <div class="col">
+        <span style="color:#fff">Balance</span><h2 type="text" id="n1">2000</h2>
+      </div>
     </div>
-    <h4>Click on a expense to edit its title or content</h4>
+
     <div id="user-input" class="row align-items-center">
       <div class="col">
+        <h4>Click on a expense to edit its title or content</h4>
         <p>Expense($)</p>
-        <input type="text" id="title" />
+        <select id="operators">
+          <option value="+">+</option>
+          <option value="-">-</option>
+          <option value="/">/</option>
+          <option value="X">x</option>
+        </select>
+        <input type="text" id="n2" placeholder ="0"/>
         <br />
         <div class="col">
           <p>Description</p>
